@@ -1,6 +1,9 @@
 '''This Python script reads the geometrical structure of a molecule, as given in the xyz file, and computes the hybridization indexes and pyramid
 angle of C atoms, if any'''
 
+from collections import Counter
+import sys
+
 # Defining function read_xyz() that reads a xyz file (filename)
 def read_xyz(filename):
     '''This function return a list of atoms and coordinates
@@ -13,23 +16,45 @@ def read_xyz(filename):
 
     xyz_file = open(filename)
     
-    # Reading number of atoms
+    # Reading number of atoms 
     n_atoms = int(xyz_file.readline())
+
+    # Reading title
     title = xyz_file.readline()
+
+    # Reading atom labels and xyz coordinates 
     for line in xyz_file:
         atom, x, y, z = line.split()
         atoms.append(atom)
         coordinates.append([float(x),float(y), float(z)])
+
     xyz_file.close()
 
+    # Check if number of atoms and number of coordinates match 
     if n_atoms != len(coordinates):
         raise ValueError("File says %d atoms but read %d points." % (n_atoms, len(coordinates)))
 
     return atoms, coordinates
 
+# Reading filename from stdin
 file = input("xyz? ")
 
 atoms, coordinates = read_xyz(file)
 
+# Molecule info:
+n_atoms = len(atoms)
 
+atom_counter = Counter(atoms)
+n_carbons = atom_counter.get("C", 0)
+if n_carbons == 0:
+    sys.exit("ERROR! No C atoms in the xyz file!")
+
+print("")
+print("############################################")
+print("")
+print("filename:                %s" % file)
+print("number of atoms:         %d" % n_atoms)
+print("number of distinct C:    %d" % n_carbons)
+print("")
+print("############################################")
 
