@@ -27,6 +27,9 @@ def read_xyz(filename):
 
     return atoms, coordinates
 
+file = input("xyz? ")
+
+atoms, coordinates = read_xyz(file)
 
 
 
