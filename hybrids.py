@@ -3,6 +3,7 @@ angle of C atoms, if any'''
 
 from collections import Counter
 import sys
+import numpy as np
 
 # Defining function read_xyz() that reads a xyz file (filename)
 def read_xyz(filename):
@@ -57,4 +58,14 @@ print("number of atoms:         %d" % n_atoms)
 print("number of distinct C:    %d" % n_carbons)
 print("")
 print("############################################")
+
+coord_np = np.array(coordinates)
+
+#dist = np.linalg.norm(coord_np[0]-coord_np[1])
+for i in range(n_atoms):
+    dist_list = [np.linalg.norm(coord_np[i]-coord_np[j]) for j in range(n_atoms)]
+    dist_np = np.array(dist_list)
+    indx = np.argsort(dist_np)[:4]
+    print(indx)
+    print(dist_np[indx])
 
