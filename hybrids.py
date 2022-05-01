@@ -2,6 +2,7 @@
 angle of C atoms, if any'''
 
 from collections import Counter
+from collections import defaultdict
 import sys
 import numpy as np
 
@@ -62,10 +63,18 @@ print("############################################")
 coord_np = np.array(coordinates)
 
 #dist = np.linalg.norm(coord_np[0]-coord_np[1])
+
+dist_ind_dict = defaultdict(list)
+dist_val_dict = defaultdict(list)
+
 for i in range(n_atoms):
     dist_list = [np.linalg.norm(coord_np[i]-coord_np[j]) for j in range(n_atoms)]
     dist_np = np.array(dist_list)
-    indx = np.argsort(dist_np)[:4]
-    print(indx)
-    print(dist_np[indx])
+    indx = list(np.argsort(dist_np)[1:4])
 
+    dist_ind_dict[i]=indx
+    dist_val_dict[i]=dist_np[indx]
+
+
+for key, val in dist_ind_dict.items():
+    print("Index of nn of", key, " are: ", val)
