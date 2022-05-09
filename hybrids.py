@@ -66,18 +66,24 @@ coord_np = np.array(coordinates)
 dist_ind_dict = defaultdict(list)
 dist_val_dict = defaultdict(list)
 
-for i in range(n_atoms):
+#for i in range(n_atoms):
     # Computing Euclidean distances:
-    dist_list = [np.linalg.norm(coord_np[i]-coord_np[j]) for j in range(n_atoms)]
+#    dist_list = [np.linalg.norm(coord_np[i]-coord_np[j]) for j in range(n_atoms)]
 
     # Converting to NumPy array and taking first three nn:
-    dist_np = np.array(dist_list)
-    indx = list(np.argsort(dist_np)[1:4])
+#    dist_np = np.array(dist_list)
+#    indx = list(np.argsort(dist_np)[1:4])
 
     # Updating dictionaries:
-    dist_ind_dict[i]=indx
-    dist_val_dict[i]=dist_np[indx]
+#    dist_ind_dict[i]=indx
+#    dist_val_dict[i]=dist_np[indx]
 
+def nn(i, coord):
+    natom, ncoord = coord.shape
+    bl_list = np.array([np.linalg.norm(coord[i]-coord[j]) for j in range(natom) ])
 
-for key, val in dist_ind_dict.items():
-    print("Index of nn of", key, " are: ", val)
+    nn_indx = list(np.argsort(bl_list)[1:4])
+
+    return nn_indx, bl_list[nn_indx]
+
+print(nn(1, coord_np))
