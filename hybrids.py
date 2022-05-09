@@ -62,16 +62,19 @@ print("############################################")
 
 coord_np = np.array(coordinates)
 
-#dist = np.linalg.norm(coord_np[0]-coord_np[1])
-
+# Initiliaze empty dictionary for nn indexes and nn distances:
 dist_ind_dict = defaultdict(list)
 dist_val_dict = defaultdict(list)
 
 for i in range(n_atoms):
+    # Computing Euclidean distances:
     dist_list = [np.linalg.norm(coord_np[i]-coord_np[j]) for j in range(n_atoms)]
+
+    # Converting to NumPy array and taking first three nn:
     dist_np = np.array(dist_list)
     indx = list(np.argsort(dist_np)[1:4])
 
+    # Updating dictionaries:
     dist_ind_dict[i]=indx
     dist_val_dict[i]=dist_np[indx]
 
