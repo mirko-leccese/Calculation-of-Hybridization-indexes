@@ -79,11 +79,17 @@ dist_val_dict = defaultdict(list)
 #    dist_val_dict[i]=dist_np[indx]
 
 def nn(i, coord):
+    ''' This function determines the first three nearest-neighbors of an atom of index i 
+    in the set of atoms specified by the coordinates coord (a Numpy array) '''
+
+    # Finding number of atoms
     natom, ncoord = coord.shape
-    bl_list = np.array([np.linalg.norm(coord[i]-coord[j]) for j in range(natom) ])
 
-    nn_indx = list(np.argsort(bl_list)[1:4])
+    # Computing Euclidean distances 
+    dist_list = np.array([np.linalg.norm(coord[i]-coord[j]) for j in range(natom) ])
 
-    return nn_indx, bl_list[nn_indx]
+    nn_indx = list(np.argsort(dist_list)[1:4])
+
+    return nn_indx, dist_list[nn_indx]
 
 print(nn(1, coord_np))
