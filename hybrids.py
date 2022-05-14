@@ -81,3 +81,4 @@ def nn(i, coord):
     return nn_indx, dist_list[nn_indx]
 
 print(nn(1, coord_np))
+
