@@ -5,6 +5,7 @@ from collections import Counter
 from collections import defaultdict
 import sys
 import numpy as np
+import math
 
 # Defining function read_xyz() that reads a xyz file (filename)
 def read_xyz(filename):
@@ -82,3 +83,16 @@ def nn(i, coord):
 
 print(nn(1, coord_np))
 
+nn_1, dist_nn1_ = nn(1,coord_np)
+# Computing angle
+vector_1 = coord_np[1] - coord_np[nn_1[0]]
+vector_2 = coord_np[1] - coord_np[nn_1[1]]
+vector_3 = coord_np[1] - coord_np[nn_1[2]]
+
+unit_vector_1  = vector_1 / np.linalg.norm(vector_1)
+unit_vector_2 = vector_2 / np.linalg.norm(vector_2)
+dot_product = np.dot(unit_vector_1, unit_vector_2)
+angle = np.arccos(dot_product)
+angle_deg = math.degrees(angle)
+
+print(angle_deg)
