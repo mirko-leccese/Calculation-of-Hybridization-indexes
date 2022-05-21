@@ -85,10 +85,23 @@ def nn(i, coord):
 print(nn(1, coord_np))
 
 nn_1, dist_nn1_ = nn(1,coord_np)
+
+def angle(i, coord_np):
+    nn_i, dist_nn_i = nn(i, coord_np)
+
+    vector_nn = np.array([coord_np[i] - coord_np[nn_i[j]] for j in range(3)])
+
+    return vector_nn
+
+test_vect = angle(1, coord_np)
 # Computing angle 
 vector_1 = coord_np[1] - coord_np[nn_1[0]]
 vector_2 = coord_np[1] - coord_np[nn_1[1]]
 vector_3 = coord_np[1] - coord_np[nn_1[2]]
+
+print(test_vect)
+print(vector_1, vector_2, vector_3)
+
 
 unit_vector_1  = vector_1 / np.linalg.norm(vector_1)
 unit_vector_2 = vector_2 / np.linalg.norm(vector_2)
@@ -105,9 +118,10 @@ dot_product_23 = np.dot(unit_vector_2,unit_vector_3)
 angle_23 = math.degrees(np.arccos(dot_product_23))
 
 
-print(angle_12, angle_13, angle_23)
+#print(angle_12, angle_13, angle_23)
 
 h1 = - dot_product_23 / (dot_product_12*dot_product_13)
 h2 =  - dot_product_13 / (dot_product_23 * dot_product_12)
 h3 = - dot_product_12 / (dot_product_23*dot_product_13)
-print(h1, h2, h3)
+
+#print(h1, h2, h3)
