@@ -84,15 +84,24 @@ def nn(i, coord):
 print(nn(1, coord_np))
 
 nn_1, dist_nn1_ = nn(1,coord_np)
-# Computing angle
+# Computing angle 
 vector_1 = coord_np[1] - coord_np[nn_1[0]]
 vector_2 = coord_np[1] - coord_np[nn_1[1]]
 vector_3 = coord_np[1] - coord_np[nn_1[2]]
 
 unit_vector_1  = vector_1 / np.linalg.norm(vector_1)
 unit_vector_2 = vector_2 / np.linalg.norm(vector_2)
-dot_product = np.dot(unit_vector_1, unit_vector_2)
-angle = np.arccos(dot_product)
-angle_deg = math.degrees(angle)
+unit_vector_3 = vector_3 / np.linalg.norm(vector_3)
 
-print(angle_deg)
+
+dot_product_12 = np.dot(unit_vector_1, unit_vector_2)
+angle_12 = math.degrees(np.arccos(dot_product_12))
+
+dot_product_13 = np.dot(unit_vector_1, unit_vector_3)
+angle_13 = math.degrees(np.arccos(dot_product_13))
+
+dot_product_23 = np.dot(unit_vector_2,unit_vector_3)
+angle_23 = math.degrees(np.arccos(dot_product_23))
+
+
+print(angle_12, angle_13, angle_23)
