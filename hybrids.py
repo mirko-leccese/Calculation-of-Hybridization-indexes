@@ -105,3 +105,6 @@ angle_23 = math.degrees(np.arccos(dot_product_23))
 
 
 print(angle_12, angle_13, angle_23)
+
+h1 = - dot_product_12 / (dot_product_23*dot_product_13)
+print(h1)
