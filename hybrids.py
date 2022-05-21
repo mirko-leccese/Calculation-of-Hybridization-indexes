@@ -3,6 +3,7 @@ angle of C atoms, if any'''
 
 from collections import Counter
 from collections import defaultdict
+from ssl import HAS_TLSv1_1
 import sys
 import numpy as np
 import math
@@ -106,5 +107,7 @@ angle_23 = math.degrees(np.arccos(dot_product_23))
 
 print(angle_12, angle_13, angle_23)
 
-h1 = - dot_product_12 / (dot_product_23*dot_product_13)
-print(h1)
+h1 = - dot_product_23 / (dot_product_12*dot_product_13)
+h2 =  - dot_product_13 / (dot_product_23 * dot_product_12)
+h3 = - dot_product_12 / (dot_product_23*dot_product_13)
+print(h1, h2, h3)
