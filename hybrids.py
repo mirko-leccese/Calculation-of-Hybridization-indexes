@@ -87,14 +87,22 @@ print(nn(1, coord_np))
 nn_1, dist_nn1_ = nn(1,coord_np)
 
 def angle(i, coord_np):
+    '''Function that computes bond angles for an atom of index i'''
+    
+    # Getting first three-nearest neighbors calling function nn():
     nn_i, dist_nn_i = nn(i, coord_np)
-
+    
+    # Building vectors connecting atom i to its nearest neighbors and normalizing them:
     vector_nn = np.array([coord_np[i] - coord_np[nn_i[j]] for j in range(3)])
     unit_vector_nn = np.array([vector_nn[i]/np.linalg.norm(vector_nn[i]) for i in range(3)])
     
-    dot_prods = set([np.dot(unit_vector_nn[i], unit_vector_nn[j]) for i in range(3) for j in range(3) if i != j])
-
+    # Computing dot products between units vetors:
+    dot_prods = set(
+            [np.dot(unit_vector_nn[i], unit_vector_nn[j]) for i in range(3) for j in range(3) if i != j]
+            )
+    # Computing angles (in  degrees):
     angles = [math.degrees(np.arccos(x)) for x in dot_prods]
+    
     return angles
 
 test_vect = angle(1, coord_np)
