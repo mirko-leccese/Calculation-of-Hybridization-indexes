@@ -102,40 +102,20 @@ def angle(i, coord_np):
             )
     # Computing angles (in  degrees):
     angles = [math.degrees(np.arccos(x)) for x in dot_prods]
+
+    return list(dot_prods), angles
+
+def hybrid(i, coord_np):
+    '''This function computes hybrid orbitals for atom of index i'''
+
+    # Getting angles:
+    cosines, bond_angles = angle(i, coord_np)
+    h1 = - cosines[2]/(cosines[0]*cosines[2])
+    h2 = -cosines[1]/(cosines[0]*cosines[2])
+    h3 = -cosines[0]/(cosines[1]*cosines[2])
     
-    return angles
+    return h1, h2, h3
 
-test_vect = angle(1, coord_np)
-test_angle = angle(1, coord_np)
+hybrid1, hybrid2, hybrid3 = hybrid(1,coord_np)
 
-# Computing angle 
-vector_1 = coord_np[1] - coord_np[nn_1[0]]
-vector_2 = coord_np[1] - coord_np[nn_1[1]]
-vector_3 = coord_np[1] - coord_np[nn_1[2]]
-
-#print(test_vect)
-#print(vector_1, vector_2, vector_3)
-
-
-unit_vector_1  = vector_1 / np.linalg.norm(vector_1)
-unit_vector_2 = vector_2 / np.linalg.norm(vector_2)
-unit_vector_3 = vector_3 / np.linalg.norm(vector_3)
-
-
-dot_product_12 = np.dot(unit_vector_1, unit_vector_2)
-angle_12 = math.degrees(np.arccos(dot_product_12))
-
-dot_product_13 = np.dot(unit_vector_1, unit_vector_3)
-angle_13 = math.degrees(np.arccos(dot_product_13))
-
-dot_product_23 = np.dot(unit_vector_2,unit_vector_3)
-angle_23 = math.degrees(np.arccos(dot_product_23))
-
-print(test_angle)
-print(angle_12, angle_13, angle_23)
-
-h1 = - dot_product_23 / (dot_product_12*dot_product_13)
-h2 =  - dot_product_13 / (dot_product_23 * dot_product_12)
-h3 = - dot_product_12 / (dot_product_23*dot_product_13)
-
-#print(h1, h2, h3)
+print(hybrid1, hybrid2, hybrid3)
