@@ -108,28 +108,38 @@ def angle(i, coord_np):
 def hybrid(i, coord_np):
     '''This function computes hybrid orbitals for atom of index i'''
     p_hybrids = []
+    s_hybrids = []
 
     # Getting angles:
     cosines, bond_angles = angle(i, coord_np)
+
+    # Computing p and s weights
     p1 = - cosines[2]/(cosines[0]*cosines[1])
+    s1 = 1/(1+p1)
+
     p2 = -cosines[1]/(cosines[0]*cosines[2])
+    s2 = 1/(1+p2)
+
     p3 = -cosines[0]/(cosines[1]*cosines[2])
+    s3 = 1/(1+p3)
+
     p_hybrids.extend([p1,p2,p3])
 
-    # Computing h4
+    # Computing p4
     sh = 0.0
     for j in p_hybrids:
         sh += (1+j)**(-1)
-    
-    print(sh)
     p4 = 1/(1-sh)-1
+    s4 = 1 - (s1+s2+s3)
 
     p_hybrids.extend([p4])
+    s_hybrids.extend([s1, s2, s3, s4])
 
-    return p_hybrids
+    return s_hybrids, p_hybrids
 
-phyb_atom1 = hybrid(1,coord_np)
+shyb_atom1, phyb_atom1 = hybrid(1,coord_np)
 
+print(shyb_atom1)
 print(phyb_atom1)
 
 #print(atoms)
