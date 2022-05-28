@@ -97,9 +97,16 @@ def angle(i, coord_np):
     unit_vector_nn = np.array([vector_nn[i]/np.linalg.norm(vector_nn[i]) for i in range(3)])
     
     # Computing dot products between units vetors:
-    dot_prods = set(
-            [np.dot(unit_vector_nn[i], unit_vector_nn[j]) for i in range(3) for j in range(3) if i != j]
-            )
+    dot_prods = []
+    prod1 = np.dot(unit_vector_nn[0], unit_vector_nn[1])
+    prod2 = np.dot(unit_vector_nn[1], unit_vector_nn[2])
+    prod3 = np.dot(unit_vector_nn[0], unit_vector_nn[2])
+    dot_prods.extend([prod1, prod2, prod3])
+
+    #dot_prods = set(
+    #        [np.dot(unit_vector_nn[i], unit_vector_nn[j]) for i in range(3) for j in range(3) if i != j]
+    #        )
+    
     # Computing angles (in  degrees):
     angles = [math.degrees(np.arccos(x)) for x in dot_prods]
 
@@ -137,13 +144,17 @@ def hybrid(i, coord_np):
 
     return s_hybrids, p_hybrids
 
-shyb_atom1, phyb_atom1 = hybrid(1,coord_np)
+#shyb_atom1, phyb_atom1 = hybrid(1,coord_np)
 
-print(shyb_atom1)
-print(phyb_atom1)
+#print(shyb_atom1)
+#print(phyb_atom1)
 
 #print(atoms)
 
-#for i in len(atoms):
-#    if atoms[i] == 'C':
+for i in range(n_atoms):
+    if atoms[i] == 'C':
+        s_weights, p_weights = hybrid(i, coord_np)
+        print(f"Atom of index {i} is a {atoms[i]} atom with s-weights {s_weights}")
+    else:
+        print(f"Atom of index {i} is a {atoms[i]} atom")
 
