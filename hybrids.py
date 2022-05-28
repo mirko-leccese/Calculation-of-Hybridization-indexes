@@ -111,7 +111,7 @@ def hybrid(i, coord_np):
 
     # Getting angles:
     cosines, bond_angles = angle(i, coord_np)
-    p1 = - cosines[2]/(cosines[0]*cosines[2])
+    p1 = - cosines[2]/(cosines[0]*cosines[1])
     p2 = -cosines[1]/(cosines[0]*cosines[2])
     p3 = -cosines[0]/(cosines[1]*cosines[2])
     p_hybrids.extend([p1,p2,p3])
