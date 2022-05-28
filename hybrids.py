@@ -82,7 +82,7 @@ def nn(i, coord):
 
     return nn_indx, dist_list[nn_indx]
 
-print(nn(1, coord_np))
+#print(nn(1, coord_np))
 
 nn_1, dist_nn1_ = nn(1,coord_np)
 
@@ -107,15 +107,33 @@ def angle(i, coord_np):
 
 def hybrid(i, coord_np):
     '''This function computes hybrid orbitals for atom of index i'''
+    p_hybrids = []
 
     # Getting angles:
     cosines, bond_angles = angle(i, coord_np)
-    h1 = - cosines[2]/(cosines[0]*cosines[2])
-    h2 = -cosines[1]/(cosines[0]*cosines[2])
-    h3 = -cosines[0]/(cosines[1]*cosines[2])
+    p1 = - cosines[2]/(cosines[0]*cosines[2])
+    p2 = -cosines[1]/(cosines[0]*cosines[2])
+    p3 = -cosines[0]/(cosines[1]*cosines[2])
+    p_hybrids.extend([p1,p2,p3])
+
+    # Computing h4
+    sh = 0.0
+    for j in p_hybrids:
+        sh += (1+j)**(-1)
     
-    return h1, h2, h3
+    print(sh)
+    p4 = 1/(1-sh)-1
 
-hybrid1, hybrid2, hybrid3 = hybrid(1,coord_np)
+    p_hybrids.extend([p4])
 
-print(hybrid1, hybrid2, hybrid3)
+    return p_hybrids
+
+phyb_atom1 = hybrid(1,coord_np)
+
+print(phyb_atom1)
+
+#print(atoms)
+
+#for i in len(atoms):
+#    if atoms[i] == 'C':
+
