@@ -7,6 +7,7 @@ from ssl import HAS_TLSv1_1
 import sys
 import numpy as np
 import math
+import matplotlib.pyplot as plt
 
 # Defining function read_xyz() that reads a xyz file (filename)
 def read_xyz(filename):
@@ -151,10 +152,15 @@ def hybrid(i, coord_np):
 
 #print(atoms)
 
+all_s = []
 for i in range(n_atoms):
     if atoms[i] == 'C':
         s_weights, p_weights = hybrid(i, coord_np)
+        all_s.append(s_weights[3]*100)
         print(f"Atom of index {i} is a {atoms[i]} atom with s-weights {s_weights}")
     else:
         print(f"Atom of index {i} is a {atoms[i]} atom")
 
+#plt.xlim(0,100)
+#plt.hist(all_s, bins=10)
+#plt.show()
