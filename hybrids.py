@@ -65,10 +65,6 @@ print('#########################################################################
 
 coord_np = np.array(coordinates)
 
-# Initiliaze empty dictionary for nn indexes and nn distances:
-dist_ind_dict = defaultdict(list)
-dist_val_dict = defaultdict(list)
-
 def nn(i, coord):
     ''' This function determines the first three nearest-neighbors of an atom of index i 
     in the set of atoms specified by the coordinates coord (a Numpy array) '''
@@ -104,11 +100,6 @@ def angle(i, coord_np):
     prod3 = np.dot(unit_vector_nn[0], unit_vector_nn[2])
     dot_prods.extend([prod1, prod2, prod3])
 
-    #dot_prods = set(
-    #        [np.dot(unit_vector_nn[i], unit_vector_nn[j]) for i in range(3) for j in range(3) if i != j]
-    #        )
-    
-    # Computing angles (in  degrees):
     angles = [math.degrees(np.arccos(x)) for x in dot_prods]
 
     return list(dot_prods), angles
@@ -166,5 +157,4 @@ for i in range(n_atoms):
         none_string = "Not a C! Not computed"
         print("{:<8}{:<8}{}".format(atoms[i], i, none_string))
         #print(f"Atom of index {i} is a {atoms[i]} atom")
-
 
