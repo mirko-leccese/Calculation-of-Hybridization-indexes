@@ -146,15 +146,12 @@ hybrid_header = "s-weights"
 
 print('{:<8}{:<8}{:<8}'.format(atom_header, label_header, hybrid_header))
 
-all_s = []
+perc_s_pi_like = []
 for i in range(n_atoms):
     if atoms[i] == 'C':
         s_weights, p_weights = hybrid(i, coord_np)
-        all_s.append(s_weights[3]*100)
+        perc_s_pi_like.append(s_weights[3]*100)
         print("{:<8}{:<8}{}".format(atoms[i], i, s_weights))
-        #print(f"Atom of index {i} is a {atoms[i]} atom with s-weights {s_weights}")
     else:
         none_string = "Not a C! Not computed"
         print("{:<8}{:<8}{}".format(atoms[i], i, none_string))
-        #print(f"Atom of index {i} is a {atoms[i]} atom")
-
