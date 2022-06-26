@@ -55,13 +55,13 @@ if n_carbons == 0:
     sys.exit("ERROR! No C atoms in the xyz file!")
 
 print("")
-print("############################################")
+print('##############################################################################################')
 print("")
 print("filename:                %s" % file)
 print("number of atoms:         %d" % n_atoms)
 print("number of distinct C:    %d" % n_carbons)
 print("")
-print("############################################")
+print('##############################################################################################')
 
 coord_np = np.array(coordinates)
 
@@ -145,22 +145,26 @@ def hybrid(i, coord_np):
 
     return s_hybrids, p_hybrids
 
-#shyb_atom1, phyb_atom1 = hybrid(1,coord_np)
+# Computing s-weights for any C in the lattice
 
-#print(shyb_atom1)
-#print(phyb_atom1)
+print('')
+print('')
+atom_header = "Atom"
+label_header = "Label"
+hybrid_header = "s-weights"
 
-#print(atoms)
+print('{:<8}{:<8}{:<8}'.format(atom_header, label_header, hybrid_header))
 
 all_s = []
 for i in range(n_atoms):
     if atoms[i] == 'C':
         s_weights, p_weights = hybrid(i, coord_np)
         all_s.append(s_weights[3]*100)
-        print(f"Atom of index {i} is a {atoms[i]} atom with s-weights {s_weights}")
+        print("{:<8}{:<8}{}".format(atoms[i], i, s_weights))
+        #print(f"Atom of index {i} is a {atoms[i]} atom with s-weights {s_weights}")
     else:
-        print(f"Atom of index {i} is a {atoms[i]} atom")
+        none_string = "Not a C! Not computed"
+        print("{:<8}{:<8}{}".format(atoms[i], i, none_string))
+        #print(f"Atom of index {i} is a {atoms[i]} atom")
 
-#plt.xlim(0,100)
-#plt.hist(all_s, bins=10)
-#plt.show()
+
