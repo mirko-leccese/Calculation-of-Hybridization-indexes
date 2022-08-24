@@ -11,10 +11,19 @@ import matplotlib.pyplot as plt
 
 # Defining function read_xyz() that reads a xyz file (filename)
 def read_xyz(filename):
-    '''This function return a list of atoms and coordinates
+   """This function reads atom labels and coordinates from a xyz file.
     
-    If the number of coordinates does not agree with the number
-    of atoms within the xyz file, it raises a ValueError'''
+    Args:
+        filename (string): the name of the xyz file
+    
+    Returns:
+        atoms (list): a list of atom labels 
+        coordinates (list): a list of [x,y,z] coordinates 
+    
+    Raises:
+        ValueError: the function raises an error if it reads a number of atoms different from what 
+            specified by the header of the xyz file.
+    """
 
     atoms = []
     coordinates = []
