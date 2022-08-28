@@ -75,9 +75,15 @@ print('#'*80)
 coord_np = np.array(coordinates)
 
 def nn(i, coord):
-    """ This function determines the first three nearest-neighbors of an atom of index i 
-    in the set of atoms specified by the coordinates coord (a Numpy array) 
+    """ This function determines the first three nearest-neighbors of an atom.
 
+    Args:
+        i (integer): index of the target atom 
+        coord (NumPy array): array specifying xyz coordinates of atoms in the molecule
+
+    Returns:
+        nn_indx (list): list of nearest-neighbors' indexes
+        nn_dist (list): list of corresponding distances from target atom (i.e. bond distances)
     """
 
     # Finding number of atoms
@@ -85,12 +91,10 @@ def nn(i, coord):
 
     # Computing Euclidean distances 
     dist_list = np.array([np.linalg.norm(coord[i]-coord[j]) for j in range(natom) ])
-
     nn_indx = list(np.argsort(dist_list)[1:4])
+    nn_dist = dist_list[nn_indx]
 
-    return nn_indx, dist_list[nn_indx]
-
-#print(nn(1, coord_np))
+    return nn_indx, nn_dist
 
 nn_1, dist_nn1_ = nn(1,coord_np)
 
