@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 # Defining function read_xyz() that reads a xyz file (filename)
 def read_xyz(filename):
-   """This function reads atom labels and coordinates from a xyz file.
+    """This function reads atom labels and coordinates from a xyz file.
     
     Args:
         filename (string): the name of the xyz file
