@@ -75,7 +75,7 @@ print('#'*80)
 coord_np = np.array(coordinates)
 
 def nn(i, coord):
-    """ This function determines the first three nearest-neighbors of an atom.
+    """ This function determines the first three nearest-neighbors of an atom from the xyz file.
 
     Args:
         i (integer): index of the target atom 
