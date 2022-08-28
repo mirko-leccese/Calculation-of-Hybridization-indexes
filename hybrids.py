@@ -64,19 +64,21 @@ if n_carbons == 0:
     sys.exit("ERROR! No C atoms in the xyz file!")
 
 print("")
-print('##############################################################################################')
+print('#'*80)
 print("")
 print("filename:                %s" % file)
 print("number of atoms:         %d" % n_atoms)
 print("number of distinct C:    %d" % n_carbons)
 print("")
-print('##############################################################################################')
+print('#'*80)
 
 coord_np = np.array(coordinates)
 
 def nn(i, coord):
-    ''' This function determines the first three nearest-neighbors of an atom of index i 
-    in the set of atoms specified by the coordinates coord (a Numpy array) '''
+    """ This function determines the first three nearest-neighbors of an atom of index i 
+    in the set of atoms specified by the coordinates coord (a Numpy array) 
+
+    """
 
     # Finding number of atoms
     natom, ncoord = coord.shape
