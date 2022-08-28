@@ -96,7 +96,7 @@ def nn(i, coord):
 
     return nn_indx, nn_dist
 
-nn_1, dist_nn1_ = nn(1,coord_np)
+#nn_1, dist_nn1_ = nn(1,coord_np)
 
 def angle(i, coord_np):
     '''Function that computes bond angles for an atom of index i'''
