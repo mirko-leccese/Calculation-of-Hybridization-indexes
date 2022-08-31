@@ -99,7 +99,7 @@ def nn(i, coord):
 #nn_1, dist_nn1_ = nn(1,coord_np)
 
 def angle(i, coord_np):
-    '''This function computes bond angles in degrees of an atom of index i.
+    '''This function computes bond angles in degrees git of an atom of index i.
 
     Args:
         i (integer) : index of the target atom
@@ -130,7 +130,17 @@ def angle(i, coord_np):
     return dot_list, angles
 
 def hybrid(i, coord_np):
-    '''This function computes hybrid orbitals for atom of index i'''
+    '''This function computes hybridization indexes and s-weights for atom of index i.
+    
+    Args:
+        i (integer) : index of the target atom
+        coord_np (Numpy array) : array specifying xyz coordinates of atoms in the molecule
+    
+    Returns:
+        s_hybrids:  a list of s-weights
+        p_hybrids : a list of hybridization indexes
+    
+    '''
     p_hybrids = []
     s_hybrids = []
 
@@ -139,22 +149,28 @@ def hybrid(i, coord_np):
 
     # Computing p and s weights
     p1 = - cosines[2]/(cosines[0]*cosines[1])
-    s1 = 1/(1+p1)
+    s1 = 1.0/(1.0+p1)
 
     p2 = -cosines[1]/(cosines[0]*cosines[2])
-    s2 = 1/(1+p2)
+    s2 = 1.0/(1.0+p2)
 
     p3 = -cosines[0]/(cosines[1]*cosines[2])
-    s3 = 1/(1+p3)
+    s3 = 1.0/(1.0+p3)
 
     p_hybrids.extend([p1,p2,p3])
 
-    # Computing p4
+    # Computing p4 (pi-like orbital hybridization index) exploiting s-weights conservation
     sh = 0.0
     for j in p_hybrids:
-        sh += (1+j)**(-1)
-    p4 = 1/(1-sh)-1
-    s4 = 1 - (s1+s2+s3)
+        sh += (1.0+j)**(-1)
+    
+    # If p4 is singular (pure p hybrid) returns infinity
+    if (1.0-sh)==0:
+        p4 = float('inf')
+    else:
+        p4 = 1.0/(1.0-sh)-1.0
+
+    s4 = 1.0 - (s1+s2+s3)
 
     p_hybrids.extend([p4])
     s_hybrids.extend([s1, s2, s3, s4])
