@@ -99,7 +99,16 @@ def nn(i, coord):
 #nn_1, dist_nn1_ = nn(1,coord_np)
 
 def angle(i, coord_np):
-    '''Function that computes bond angles for an atom of index i'''
+    '''This function computes bond angles of an atom of index i.
+
+    Args:
+        i (integer) : index of the target atom
+        coord_np (Numpy array) : array specifying xyz coordinates of atoms in the molecule
+    
+    Returns:
+        dot_list (list) : a list of bond vectors dot products 
+        angles : a list of bond angles
+    '''
     
     # Getting first three-nearest neighbors calling function nn():
     nn_i, dist_nn_i = nn(i, coord_np)
@@ -115,9 +124,10 @@ def angle(i, coord_np):
     prod3 = np.dot(unit_vector_nn[0], unit_vector_nn[2])
     dot_prods.extend([prod1, prod2, prod3])
 
+    dot_list = list(dot_prods)
     angles = [math.degrees(np.arccos(x)) for x in dot_prods]
 
-    return list(dot_prods), angles
+    return dot_list, angles
 
 def hybrid(i, coord_np):
     '''This function computes hybrid orbitals for atom of index i'''
