@@ -99,7 +99,7 @@ def nn(i, coord):
 #nn_1, dist_nn1_ = nn(1,coord_np)
 
 def angle(i, coord_np):
-    '''This function computes bond angles of an atom of index i.
+    '''This function computes bond angles in degrees of an atom of index i.
 
     Args:
         i (integer) : index of the target atom
