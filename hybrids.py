@@ -38,6 +38,7 @@ def timer(func):
 
 
 # Defining function read_xyz() that reads a xyz file (filename)
+@timer
 def read_xyz(filename):
     """This function reads atom labels and coordinates from a xyz file.
     
