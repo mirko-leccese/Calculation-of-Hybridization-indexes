@@ -8,6 +8,34 @@ import sys
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import time
+
+# Defining a decorator to return how long a function took to run:
+def timer(func):
+    """
+    Decorator that prints how long a function took to run.
+
+    Args: 
+        func (callable) : the function being decorated
+    
+    Returns:
+        callable: the decorated function
+    """
+
+    def wrapper(*args, **kwargs):
+        # Get the current time:
+        time_start = time.time()
+
+        # Call the decorated function and store the result
+        result = func(*args, **kwargs)
+
+        # Get the total time it took to run and print it
+        total_time = time.time() - time_start
+
+        print('{} took {}s to run'.format(func.__name__, total_time))
+        return result
+    return wrapper
+
 
 # Defining function read_xyz() that reads a xyz file (filename)
 def read_xyz(filename):
