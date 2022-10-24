@@ -14,5 +14,5 @@ Run the script and answer the questions
 ```
 The code first reads the ```.xyz```file which stores the geometrical structure of the molecule and then performs the calculation. The repository contains some test files, namely ```coronene.xyz```and ```fullerene.xyz```, which are respectively the optimized structure of the coronene and the $\text{C}_{60}$ fullerene molecules, shown below:
 
-![Coronene]{coronene.png}
+![Coronene](coronene.png)
 
