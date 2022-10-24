@@ -12,7 +12,7 @@ Run the script and answer the questions
 ```bash
 ./hybrids.py
 ```
-The code first reads the ```.xyz```file which stores the geometrical structure of the molecule and then performs the calculation. The repository contains some test files, namely ```coronene.xyz```and ```fullerene.xyz```, which are respectively the optimized structure of the coronene and the $\text{C}_{60}$ fullerene molecules, shown below:
+The code first reads the ```.xyz```file which stores the geometrical structure of the molecule and then performs the calculation. The repository contains some test files, namely ```coronene.xyz```and ```fullerene.xyz```. These are respectively high-level DFT optimized structures of the coronene and the $\text{C}_{60}$ fullerene molecules - shown below as obtained from high-resolution POV-Ray rendering:
 
 ![Coronene](coronene.png) ![Fullerene](fullerene.png)
 
